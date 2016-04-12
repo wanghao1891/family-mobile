@@ -176,7 +176,7 @@ class familymobile extends Component {
 //  }
 
   renderRow(task) {
-    console.log('renderRow task:', task);
+//    console.log('renderRow task:', task);
     return (
         <Text>{task.text}</Text>
     );
@@ -191,14 +191,14 @@ class familymobile extends Component {
   }
 
   render() {
-    console.log('data:', this.data);
-    let count = Object.keys(this.state.tasks).length;
-    var tasks_collection = Meteor.collection('tasks');
-    var tasks = tasks_collection.find();
-
-    console.log('tasks_collection:', tasks_collection);
-    console.log('tasks:', tasks);
-    console.log('count:', tasks.length);
+//    console.log('data:', this.data);
+//    let count = Object.keys(this.state.tasks).length;
+//    var tasks_collection = Meteor.collection('tasks');
+//    var tasks = tasks_collection.find();
+//
+//    console.log('tasks_collection:', tasks_collection);
+//    console.log('tasks:', tasks);
+//    console.log('count:', tasks.length);
     return (
       <View style={styles.container}>
         <MeteorListView
@@ -207,17 +207,7 @@ class familymobile extends Component {
            options={{sort: {createdAt: -1}}}
            renderRow={this.renderRow}
            />
-        {this.render_tasks()}
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+        {/*this.render_tasks()*/}
       </View>
     );
   }
