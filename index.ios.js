@@ -48,17 +48,15 @@ class familymobile extends Component {
     Meteor.connect(url);
     Meteor.loginWithPassword( 'john', '123456', function(err) {
       console.log('login');
+      Meteor.subscribe('tasks');
     });
   }
 
   getMeteorData() {
     console.log('getMeteorData');
-    const handle = Meteor.subscribe('tasks');
-    Meteor.subscribe('settings');
 
     return {
-      tasks: handle.ready(),
-      settings: Meteor.collection('settings').findOne()
+      tasks: Meteor.collection('tasks').find()
     };
   }
 
@@ -184,6 +182,14 @@ class familymobile extends Component {
     );
   }
 
+  render_tasks() {
+    var tasks_collection = Meteor.collection('tasks');
+    var tasks = tasks_collection.find();
+    return tasks.map(function(task) {
+      return <Text key={task._id}>{task.text}</Text>;
+    });
+  }
+
   render() {
     console.log('data:', this.data);
     let count = Object.keys(this.state.tasks).length;
@@ -196,11 +202,12 @@ class familymobile extends Component {
     return (
       <View style={styles.container}>
         <MeteorListView
-           collection="tasks"
-           selector={{done: true}}
+           collection='tasks'
+           selector={{}}
            options={{sort: {createdAt: -1}}}
            renderRow={this.renderRow}
            />
+        {this.render_tasks()}
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
