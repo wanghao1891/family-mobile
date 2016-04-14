@@ -66,7 +66,7 @@ function get_meteor_data() {
 
 function render_row(task) {
   return (
-      <Text>{task.text}</Text>
+    <Text style={styles.list_text}>{task.text}</Text>
   );
 };
 
@@ -75,6 +75,7 @@ function render() {
     <View style={styles.container}>
       <Header title='Todo List' />
       <MeteorListView
+         style={{borderWidth: 1}}
          collection='tasks'
          selector={{}}
          options={{sort: {createdAt: -1}}}
@@ -289,6 +290,16 @@ const styles = StyleSheet.create({
 //    justifyContent: 'center',
 //    alignItems: 'center',
 //    backgroundColor: '#F5FCFF'
+  },
+  list_view: {
+    borderWidth: 1,
+    //alignItems: 'center'
+    //flex: 1
+  },
+  list_text: {
+    borderWidth: 1,
+    textAlign: 'center',
+    marginTop: 10
   }
 });
 
