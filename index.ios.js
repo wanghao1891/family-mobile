@@ -38,23 +38,25 @@ var MeteorListView = Meteor.MeteorListView;
 
 console.log('Meteor', Meteor);
 
-var get_initial_state = function() {
+var Header = require('./app/components/header.js');
+
+function get_initial_state() {
   return {
     connected: false,
     tasks: {}
   };
 };
 
-var component_did_mount = function() {
+function component_did_mount() {
   var url = 'ws://localhost:3000/websocket';
-  Meteor.connec(url);
+  Meteor.connect(url);
   Meteor.loginWithPassword( 'john', '123456', function(err) {
     console.log('login');
     Meteor.subscribe('tasks');
   });
 };
 
-var get_meteor_data = function() {
+function get_meteor_data() {
   console.log('getMeteorData');
 
   return {
@@ -62,15 +64,16 @@ var get_meteor_data = function() {
   };
 };
 
-var render_row = function(task) {
+function render_row(task) {
   return (
       <Text>{task.text}</Text>
   );
 };
 
-var render = function() {
+function render() {
   return (
     <View style={styles.container}>
+      <Header title='Todo List' />
       <MeteorListView
          collection='tasks'
          selector={{}}
@@ -81,13 +84,15 @@ var render = function() {
   );
 };
 
-var familymobile = React.createClass({
+var $in = {
   getInitialState: get_initial_state,
   componentDidMount: component_did_mount,
   getMeteorData: get_meteor_data,
   render_row: render_row,
   render: render
-});
+};
+
+var familymobile = React.createClass($in);
 
 //class familymobile extends Component {
 //
@@ -280,10 +285,10 @@ Meteor.connectMeteor(familymobile);
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+//    flex: 1,
+//    justifyContent: 'center',
+//    alignItems: 'center',
+//    backgroundColor: '#F5FCFF'
   }
 });
 
