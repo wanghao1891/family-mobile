@@ -70,7 +70,7 @@ function render_row(task) {
     <View style={styles.list_row}>
       <View style={styles.list_row_left}>
         <TouchableOpacity style={styles.list_row_check_button}
-                          onPress={this.delete_all}
+                          onPress={this.toggle_checked.bind(this, task)}
                           underlayColor='#99d9f4'>
           <Text style={styles.list_row_check_text}>Check</Text>
         </TouchableOpacity>
@@ -107,12 +107,17 @@ function render() {
   );
 };
 
+function toggle_checked(task) {
+  Meteor.call('tasks.setChecked', task._id, !task.checked);
+}
+
 var familymobile = React.createClass({
   getInitialState: get_initial_state,
   componentDidMount: component_did_mount,
   getMeteorData: get_meteor_data,
   render_row: render_row,
-  render: render
+  render: render,
+  toggle_checked: toggle_checked
 });
 
 //class familymobile extends Component {
