@@ -17,6 +17,7 @@ var Component = React.Component;
 var StyleSheet = React.StyleSheet;
 var Text = React.Text;
 var View = React.View;
+var TouchableOpacity = React.TouchableOpacity;
 
 //if (typeof process === 'undefined') process = {};
 //process.nextTick = setImmediate;
@@ -66,7 +67,28 @@ function get_meteor_data() {
 
 function render_row(task) {
   return (
-    <Text style={styles.list_text}>{task.text}</Text>
+    <View style={styles.list_row}>
+      <View style={styles.list_row_left}>
+        <TouchableOpacity style={styles.list_row_check_button}
+                          onPress={this.delete_all}
+                          underlayColor='#99d9f4'>
+          <Text style={styles.list_row_check_text}>Check</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.list_row_public_button}
+                          onPress={this.delete_all}
+                          underlayColor='#99d9f4'>
+          <Text style={styles.list_row_public_text}>Public</Text>
+        </TouchableOpacity>
+        <Text style={styles.list_row_text}>{task.text}</Text>
+      </View>
+      <View style={styles.list_row_right}>
+        <TouchableOpacity style={styles.list_row_delete_button}
+                          onPress={this.delete_all}
+                          underlayColor='#99d9f4'>
+          <Text style={styles.list_row_delete_text}>Delete</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
@@ -85,15 +107,13 @@ function render() {
   );
 };
 
-var $in = {
+var familymobile = React.createClass({
   getInitialState: get_initial_state,
   componentDidMount: component_did_mount,
   getMeteorData: get_meteor_data,
   render_row: render_row,
   render: render
-};
-
-var familymobile = React.createClass($in);
+});
 
 //class familymobile extends Component {
 //
@@ -286,21 +306,54 @@ Meteor.connectMeteor(familymobile);
 
 const styles = StyleSheet.create({
   container: {
-//    flex: 1,
-//    justifyContent: 'center',
-//    alignItems: 'center',
-//    backgroundColor: '#F5FCFF'
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start'
   },
-  list_view: {
+  list_row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     borderWidth: 1,
-    //alignItems: 'center'
-    //flex: 1
+    margin: 10
   },
-  list_text: {
+  list_row_left: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    borderWidth: 1,
+    margin: 10
+  },
+  list_row_check_button: {
+    borderWidth: 1,
+    margin: 10
+  },
+  list_row_check_text: {
+    fontWeight: 'bold'
+  },
+  list_row_public_button: {
+    borderWidth: 1,
+    margin: 10
+  },
+  list_row_public_text: {
+    fontWeight: 'bold'
+  },
+  list_row_text: {
     borderWidth: 1,
     textAlign: 'center',
-    marginTop: 10
-  }
+    margin: 10
+  },
+  list_row_right: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    borderWidth: 1,
+    margin: 10
+  },
+  list_row_delete_button: {
+    borderWidth: 1,
+    margin: 10
+  },
+  list_row_delete_text: {
+    fontWeight: 'bold'
+  },
 });
 
 AppRegistry.registerComponent('familymobile', () => familymobile);

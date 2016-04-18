@@ -21,8 +21,8 @@ var styles = style_sheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginBottom: 10
   },
   title: {
     borderWidth: 1,
