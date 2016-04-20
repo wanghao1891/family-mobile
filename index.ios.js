@@ -75,7 +75,7 @@ function render_row(task) {
           <Text style={styles.list_row_check_text}>Check</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.list_row_public_button}
-                          onPress={this.delete_all}
+                          onPress={this.toggle_private.bind(this, task)}
                           underlayColor='#99d9f4'>
           <Text style={styles.list_row_public_text}>Public</Text>
         </TouchableOpacity>
@@ -112,7 +112,11 @@ function toggle_checked(task) {
 }
 
 function delete_this_task(task) {
-  Meteor.call('tasks.remove', task._id, !task.checked);
+  Meteor.call('tasks.remove', task._id);
+}
+
+function toggle_private(task) {
+  Meteor.call('tasks.setPrivate', task._id, !task.private);
 }
 
 var familymobile = React.createClass({
@@ -122,7 +126,8 @@ var familymobile = React.createClass({
   render_row: render_row,
   render: render,
   toggle_checked: toggle_checked,
-  delete_this_task: delete_this_task
+  delete_this_task: delete_this_task,
+  toggle_private: toggle_private
 });
 
 //class familymobile extends Component {
