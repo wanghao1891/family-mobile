@@ -40,6 +40,7 @@ var MeteorListView = Meteor.MeteorListView;
 console.log('Meteor', Meteor);
 
 var Header = require('./app/components/header.js');
+var CreateTask = require('./app/components/create.task.js');
 
 function get_initial_state() {
   return {
@@ -107,6 +108,7 @@ function render() {
   return (
     <View style={styles.container}>
       <Header title='Todo List' />
+      <CreateTask />
       <MeteorListView
          style={{borderWidth: 1}}
          collection='tasks'
