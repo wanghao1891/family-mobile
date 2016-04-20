@@ -40,15 +40,12 @@ var styles = style_sheet.create({
   container: {
     borderWidth: 1,
     height: 50,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
     marginBottom: 10
   },
   task_name: {
     borderWidth: 1,
     margin: 10,
-    width: 200
+    flex: 1 //fill space
   }
 });
 

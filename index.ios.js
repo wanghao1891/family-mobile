@@ -62,7 +62,7 @@ function get_meteor_data() {
   console.log('getMeteorData');
 
   return {
-    tasks: Meteor.collection('tasks').find()
+    //tasks: Meteor.collection('tasks').find()
   };
 };
 
