@@ -83,7 +83,6 @@ function render_row(task) {
         <TouchableOpacity style={styles.list_row_check_button}
                           onPress={this.toggle_checked.bind(this, task)}
                           underlayColor='#99d9f4'>
-
           <Text style={styles.list_row_check_text}>{check_text}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.list_row_public_button}
@@ -105,9 +104,13 @@ function render_row(task) {
 };
 
 function render() {
+
   return (
     <View style={styles.container}>
-      <Header title='Todo List' />
+      <Header title='Todo List'
+              user={Meteor.user()}
+              incomplete_count={Meteor.collection('tasks').find({ checked: { $ne: true } }).length}
+              />
       <CreateTask />
       <MeteorListView
          style={{borderWidth: 1}}
@@ -381,7 +384,7 @@ const styles = StyleSheet.create({
   },
   list_row_delete_text: {
     fontWeight: 'bold'
-  },
+  }
 });
 
 AppRegistry.registerComponent('familymobile', () => familymobile);
