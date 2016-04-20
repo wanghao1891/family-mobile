@@ -66,18 +66,29 @@ function get_meteor_data() {
 };
 
 function render_row(task) {
+  var check_text = 'Check';
+  if(task.checked) {
+    check_text = 'Checked';
+  }
+
+  var public_text = 'Public';
+  if(task.private) {
+    public_text = 'Private';
+  }
+
   return (
     <View style={styles.list_row}>
       <View style={styles.list_row_left}>
         <TouchableOpacity style={styles.list_row_check_button}
                           onPress={this.toggle_checked.bind(this, task)}
                           underlayColor='#99d9f4'>
-          <Text style={styles.list_row_check_text}>Check</Text>
+
+          <Text style={styles.list_row_check_text}>{check_text}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.list_row_public_button}
                           onPress={this.toggle_private.bind(this, task)}
                           underlayColor='#99d9f4'>
-          <Text style={styles.list_row_public_text}>Public</Text>
+          <Text style={styles.list_row_public_text}>{public_text}</Text>
         </TouchableOpacity>
         <Text style={styles.list_row_text}>{task.text}</Text>
       </View>
