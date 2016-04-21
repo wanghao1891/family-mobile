@@ -45,7 +45,8 @@ var CreateTask = require('./app/components/create.task.js');
 function get_initial_state() {
   return {
     connected: false,
-    tasks: {}
+    tasks: {},
+    hide_completed: false
   };
 };
 
@@ -104,18 +105,23 @@ function render_row(task) {
 };
 
 function render() {
-
+  console.log('hide_completed:', this.state.hide_completed);
+  var selector = {};
+  if(this.state.hide_completed) {
+    selector = {checked: {$ne: true}};
+  }
   return (
     <View style={styles.container}>
       <Header title='Todo List'
               user={Meteor.user()}
               incomplete_count={Meteor.collection('tasks').find({ checked: { $ne: true } }).length}
+              parent={this}
               />
       <CreateTask />
       <MeteorListView
          style={{borderWidth: 1}}
          collection='tasks'
-         selector={{}}
+         selector={selector}
          options={{sort: {createdAt: -1}}}
          renderRow={this.render_row}
          />
