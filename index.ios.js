@@ -41,12 +41,14 @@ console.log('Meteor', Meteor);
 
 var Header = require('./app/components/header.js');
 var CreateTask = require('./app/components/create.task.js');
+var User = require('./app/components/user.js');
 
 function get_initial_state() {
   return {
     connected: false,
     tasks: {},
-    hide_completed: false
+    hide_completed: false,
+    show_user: false
   };
 };
 
@@ -66,6 +68,22 @@ function get_meteor_data() {
     //tasks: Meteor.collection('tasks').find()
   };
 };
+
+function render_user() {
+  return (
+    <User visible={this.state.show_user}>
+      <View style={_styles.actionSheetContainer}>
+        <TouchableOpacity
+           style={{flex:1}}
+           onPress={() => this.setState({show_user: false})}>
+        </TouchableOpacity>
+        <Text>
+          User
+        </Text>
+      </View>
+    </User>
+  );
+}
 
 function render_row(task) {
   var check_text = 'Check';
@@ -110,6 +128,8 @@ function render() {
   if(this.state.hide_completed) {
     selector = {checked: {$ne: true}};
   }
+
+  var user = this.render_user();
   return (
     <View style={styles.container}>
       <Header title='Todo List'
@@ -125,6 +145,7 @@ function render() {
          options={{sort: {createdAt: -1}}}
          renderRow={this.render_row}
          />
+      {user}
     </View>
   );
 };
@@ -146,6 +167,7 @@ var familymobile = React.createClass({
   componentDidMount: component_did_mount,
   getMeteorData: get_meteor_data,
   render_row: render_row,
+  render_user: render_user,
   render: render,
   toggle_checked: toggle_checked,
   delete_this_task: delete_this_task,
@@ -391,6 +413,20 @@ const styles = StyleSheet.create({
   list_row_delete_text: {
     fontWeight: 'bold'
   }
+});
+
+var _styles = StyleSheet.create({
+    actionSheetContainer: {
+        flex: 1,
+        padding: 10,
+        paddingBottom: 6,
+        justifyContent: "flex-end",
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    buttonContainer: {
+        borderRadius:6,
+        overflow: 'hidden',
+    }
 });
 
 AppRegistry.registerComponent('familymobile', () => familymobile);

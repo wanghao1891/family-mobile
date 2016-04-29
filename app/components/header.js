@@ -19,7 +19,8 @@ function render() {
         <Text style={styles.hide_completed_tasks_text}>Hide Completed Tasks</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.user_button}
-                        underlayColor='#99d9f4'>
+                        underlayColor='#99d9f4'
+                        onPress={this.show_user}>
         <Text style={styles.user_text}>{user_name}</Text>
       </TouchableOpacity>
     </View>
@@ -32,12 +33,14 @@ function toggle_hide_completed() {
 }
 
 function show_user() {
-
+  var parent = this.props.parent;
+  parent.setState({show_user: true});
 }
 
 var header = React.createClass({
   render: render,
-  toggle_hide_completed: toggle_hide_completed
+  toggle_hide_completed: toggle_hide_completed,
+  show_user: show_user
 });
 
 var styles = style_sheet.create({
