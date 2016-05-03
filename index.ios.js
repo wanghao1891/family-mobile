@@ -41,7 +41,7 @@ console.log('Meteor', Meteor);
 
 var Header = require('./app/components/header.js');
 var CreateTask = require('./app/components/create.task.js');
-var User = require('./app/components/user.js');
+var Overlay = require('./app/components/overlay.js');
 
 function get_initial_state() {
   return {
@@ -71,7 +71,7 @@ function get_meteor_data() {
 
 function render_user() {
   return (
-    <User visible={this.state.show_user}>
+    <Overlay visible={this.state.show_user}>
       <View style={_styles.actionSheetContainer}>
         <TouchableOpacity
            style={{flex:1}}
@@ -81,7 +81,7 @@ function render_user() {
           User
         </Text>
       </View>
-    </User>
+    </Overlay>
   );
 }
 
