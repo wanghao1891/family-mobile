@@ -37,7 +37,7 @@ function render() {
   );
 }
 
-module.exports = React.createClass({
+var overlay = React.createClass({
   getInitialState: get_initial_state,
   on_animated_end: on_animated_end,
   componentWillReceiveProps: component_will_receive_props,
@@ -58,3 +58,5 @@ var styles = StyleSheet.create({
         position: 'absolute'
     }
 });
+
+module.exports = overlay;
