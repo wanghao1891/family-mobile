@@ -16,6 +16,10 @@ function render() {
          style={styles.password}
          placeholder='Password'
          />
+      <TouchableOpacity style={styles.signin_button}
+                        underlayColor='#99d9f4'>
+        <Text style={styles.signin_text}>Signin</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -27,21 +31,33 @@ var signin = React.createClass({
 var styles = style_sheet.create({
   container: {
     borderWidth: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     backgroundColor: 'white',
-    height: 100
+    height: 150
   },
   username: {
     borderWidth: 1,
     flex: 1,
     margin: 10,
-    marginBottom: 5
+    marginBottom: 5,
+    //height: 35
   },
   password: {
     borderWidth: 1,
     flex: 1,
     margin: 10,
+    marginTop: 5,
+    marginBottom: 5,
+    //height: 35
+  },
+  signin_button: {
+    borderWidth: 1,
+    margin: 10,
     marginTop: 5
+  },
+  signin_text: {
+    borderWidth: 1,
+    margin: 10
   }
 });
 
