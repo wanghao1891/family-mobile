@@ -10,16 +10,24 @@ function render() {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-    style={styles.click_and_disappear}
-    onPress={() => this.props.parent.setState({show_user: false})}>
+         style={styles.click_and_disappear}
+         onPress={() => this.props.parent.setState({show_user: false})}>
       </TouchableOpacity>
-      <Signin />
+      <Signin parent={this}>
+      </Signin>
     </View>
   );
 }
 
+function hidden_user() {
+  this.props.parent.setState({
+    show_user: false
+  });
+}
+
 var user = React.createClass({
-  render: render
+  render: render,
+  hidden_user: hidden_user
 });
 
 var styles = style_sheet.create({

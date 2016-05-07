@@ -56,10 +56,10 @@ function get_initial_state() {
 function component_did_mount() {
   var url = 'ws://localhost:3000/websocket';
   Meteor.connect(url);
-  Meteor.loginWithPassword( 'john', '123456', function(err) {
-    console.log('login');
-    Meteor.subscribe('tasks');
-  });
+  //Meteor.loginWithPassword( 'john', '123456', function(err) {
+  //  console.log('login');
+  //  Meteor.subscribe('tasks');
+  //});
 };
 
 function get_meteor_data() {
@@ -406,20 +406,6 @@ const styles = StyleSheet.create({
   list_row_delete_text: {
     fontWeight: 'bold'
   }
-});
-
-var _styles = StyleSheet.create({
-    actionSheetContainer: {
-        flex: 1,
-        padding: 10,
-        paddingBottom: 6,
-        justifyContent: "flex-end",
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    },
-    buttonContainer: {
-        borderRadius:6,
-        overflow: 'hidden',
-    }
 });
 
 AppRegistry.registerComponent('familymobile', () => familymobile);
