@@ -5,16 +5,32 @@ var View = React.View;
 var TouchableOpacity = React.TouchableOpacity;
 
 var Signin = require('./signin.js');
+var Signout = require('./signout.js');
+
+var Meteor = require('react-native-meteor');
 
 function render() {
+  var current_ui;
+
+  if(Meteor.user()) {
+    current_ui = (
+        <Signout parent={this}>
+        </Signout>
+    );
+  } else {
+    current_ui = (
+        <Signin parent={this}>
+        </Signin>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
          style={styles.click_and_disappear}
          onPress={() => this.props.parent.setState({show_user: false})}>
       </TouchableOpacity>
-      <Signin parent={this}>
-      </Signin>
+      {current_ui}
     </View>
   );
 }

@@ -10,23 +10,10 @@ var Meteor = require('react-native-meteor');
 function render() {
   return (
     <View style={styles.container}>
-      <TextInput
-         style={styles.username}
-         placeholder='Username'
-         value={this.state.username}
-         onChangeText={(text) => this.setState({username: text})}>
-      </TextInput>
-      <TextInput
-         style={styles.password}
-         placeholder='Password'
-         value={this.state.password}
-         onChangeText={(text) => this.setState({password: text})}
-        secureTextEntry={true}>
-      </TextInput>
       <TouchableOpacity style={styles.signin_button}
-                        onPress={this.signin}
+                        onPress={this.signout}
                         underlayColor='#99d9f4'>
-        <Text style={styles.signin_text}>Signin</Text>
+        <Text style={styles.signin_text}>Sign out</Text>
       </TouchableOpacity>
     </View>
   );
@@ -39,21 +26,20 @@ function get_initial_state() {
   };
 }
 
-function signin() {
+function signout() {
   var username = this.state.username;
   var password = this.state.password;
 
-  Meteor.loginWithPassword(username, password, function(err) {
-    console.log('login');
-    Meteor.subscribe('tasks');
+  Meteor.logout(function(err) {
+    console.log('logout');
   });
 
   this.props.parent.hidden_user();
 }
 
-var signin = React.createClass({
+var signout = React.createClass({
   render: render,
-  signin: signin,
+  signout: signout,
   getInitialState: get_initial_state
 });
 
@@ -91,4 +77,4 @@ var styles = style_sheet.create({
   }
 });
 
-module.exports = signin;
+module.exports = signout;

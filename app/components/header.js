@@ -9,6 +9,8 @@ function render() {
   var user_name;
   if(this.props.user) {
     user_name = this.props.user.username;
+  } else {
+    user_name = 'Sign in';
   }
   return (
     <View style={styles.container}>
