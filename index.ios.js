@@ -56,6 +56,7 @@ function get_initial_state() {
 function component_did_mount() {
   var url = 'ws://localhost:3000/websocket';
   Meteor.connect(url);
+  Meteor.subscribe('tasks');
   //Meteor.loginWithPassword( 'john', '123456', function(err) {
   //  console.log('login');
   //  Meteor.subscribe('tasks');
