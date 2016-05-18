@@ -6,13 +6,20 @@ var TouchableOpacity = React.TouchableOpacity;
 
 var Signin = require('./signin.js');
 var Signout = require('./signout.js');
+var ChangePassword = require('./change.password.js');
 
 var Meteor = require('react-native-meteor');
 
 function render() {
   var current_ui;
 
-  if(Meteor.user()) {
+  if(this.state.show_change_password){
+    console.log(ChangePassword);
+    current_ui = (
+        <ChangePassword parent={this}>
+        </ChangePassword>
+    );
+  } else if(Meteor.user()) {
     current_ui = (
         <Signout parent={this}>
         </Signout>
@@ -35,6 +42,12 @@ function render() {
   );
 }
 
+function get_initial_state() {
+  return {
+    show_change_password: false
+  };
+}
+
 function hidden_user() {
   this.props.parent.setState({
     show_user: false
@@ -43,7 +56,8 @@ function hidden_user() {
 
 var user = React.createClass({
   render: render,
-  hidden_user: hidden_user
+  hidden_user: hidden_user,
+  getInitialState: get_initial_state
 });
 
 var styles = style_sheet.create({
